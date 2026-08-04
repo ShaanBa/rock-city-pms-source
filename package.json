@@ -15,5 +15,6 @@
   },
   "dependencies": {
     "date-fns": "^4.3.0"
-  }
+  },
+  "description": "Rock City Motel PMS monorepo (dependency-review smoke)"
 }

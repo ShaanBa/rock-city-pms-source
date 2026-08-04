@@ -1,0 +1,417 @@
+{
+  "id": "d7641999-7fba-4228-8251-243ff1ba5d48",
+  "prevId": "b1c2a021-a316-4fc6-baa2-ee206ad86617",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.guests": {
+      "name": "guests",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "FirstName": {
+          "name": "FirstName",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "LastName": {
+          "name": "LastName",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Address": {
+          "name": "Address",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Phone": {
+          "name": "Phone",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Email": {
+          "name": "Email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "LicensePlate": {
+          "name": "LicensePlate",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "VehicleMake": {
+          "name": "VehicleMake",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "IsIdVerified": {
+          "name": "IsIdVerified",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "StripeCustomerId": {
+          "name": "StripeCustomerId",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "IsDNR": {
+          "name": "IsDNR",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "AdminNotes": {
+          "name": "AdminNotes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.reservations": {
+      "name": "reservations",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "GuestId": {
+          "name": "GuestId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "GroupName": {
+          "name": "GroupName",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "PaymentStatus": {
+          "name": "PaymentStatus",
+          "type": "PaymentStatus",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "BookingSource": {
+          "name": "BookingSource",
+          "type": "BookingSource",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ReservationStatus": {
+          "name": "ReservationStatus",
+          "type": "ReservationStatus",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "reservations_GuestId_guests_id_fk": {
+          "name": "reservations_GuestId_guests_id_fk",
+          "tableFrom": "reservations",
+          "tableTo": "guests",
+          "columnsFrom": [
+            "GuestId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.room_stays": {
+      "name": "room_stays",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "ReservationId": {
+          "name": "ReservationId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "RoomId": {
+          "name": "RoomId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CheckInDate": {
+          "name": "CheckInDate",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CheckOutDate": {
+          "name": "CheckOutDate",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "NumberOfGuests": {
+          "name": "NumberOfGuests",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "PetCount": {
+          "name": "PetCount",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "AdditionalFees": {
+          "name": "AdditionalFees",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        },
+        "DiscountAmount": {
+          "name": "DiscountAmount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        },
+        "RoomSubTotal": {
+          "name": "RoomSubTotal",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "RoomTaxAmount": {
+          "name": "RoomTaxAmount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "RoomTotalAmount": {
+          "name": "RoomTotalAmount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "RoomStayStatus": {
+          "name": "RoomStayStatus",
+          "type": "RoomStayStatus",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "room_stays_ReservationId_reservations_id_fk": {
+          "name": "room_stays_ReservationId_reservations_id_fk",
+          "tableFrom": "room_stays",
+          "tableTo": "reservations",
+          "columnsFrom": [
+            "ReservationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "room_stays_RoomId_rooms_id_fk": {
+          "name": "room_stays_RoomId_rooms_id_fk",
+          "tableFrom": "room_stays",
+          "tableTo": "rooms",
+          "columnsFrom": [
+            "RoomId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.rooms": {
+      "name": "rooms",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "RoomNumber": {
+          "name": "RoomNumber",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "RoomType": {
+          "name": "RoomType",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "BasePrice": {
+          "name": "BasePrice",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "IsSmoking": {
+          "name": "IsSmoking",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CleanStatus": {
+          "name": "CleanStatus",
+          "type": "CleanStatus",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "PriorityTier": {
+          "name": "PriorityTier",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ConditionNotes": {
+          "name": "ConditionNotes",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "rooms_RoomNumber_unique": {
+          "name": "rooms_RoomNumber_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "RoomNumber"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.BookingSource": {
+      "name": "BookingSource",
+      "schema": "public",
+      "values": [
+        "DirectWeb",
+        "WalkIn",
+        "Phone",
+        "Expedia",
+        "BookingDotCom"
+      ]
+    },
+    "public.CleanStatus": {
+      "name": "CleanStatus",
+      "schema": "public",
+      "values": [
+        "Clean",
+        "Dirty",
+        "OutOfOrder",
+        "NotRented"
+      ]
+    },
+    "public.PaymentStatus": {
+      "name": "PaymentStatus",
+      "schema": "public",
+      "values": [
+        "Unpaid",
+        "Partial",
+        "Paid"
+      ]
+    },
+    "public.ReservationStatus": {
+      "name": "ReservationStatus",
+      "schema": "public",
+      "values": [
+        "Active",
+        "Completed",
+        "Cancelled"
+      ]
+    },
+    "public.RoomStayStatus": {
+      "name": "RoomStayStatus",
+      "schema": "public",
+      "values": [
+        "Confirmed",
+        "CheckedIn",
+        "CheckedOut",
+        "Cancelled"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

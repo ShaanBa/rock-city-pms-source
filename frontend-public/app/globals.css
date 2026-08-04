@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+/* Brand palette: weathered roadside red, highway navy, limestone surfaces */
+:root {
+  --background: #FAFAF8;
+  --foreground: #172332;
+  --brand-red: #A63D35;
+  --brand-red-hover: #842F2A;
+  --brand-dark: #172332;
+  --text-muted: #625E57;
+  --border-warm: #D9D4CA;
+  --section-warm: #EEEAE2;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-red: var(--brand-red);
+  --color-brand-red-hover: var(--brand-red-hover);
+  --color-brand-dark: var(--brand-dark);
+  --color-text-muted: var(--text-muted);
+  --color-border-warm: var(--border-warm);
+  --color-section-warm: var(--section-warm);
+  --font-display: var(--font-bitter);
+  --font-body: var(--font-karla);
+  --font-sans: var(--font-karla);
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.35s ease-out both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 1;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 1; }
+  to { opacity: 1; }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Navigation uses type and tone instead of a decorative animated underline. */
+.nav-link {
+  transition: color 0.2s ease;
+}
+.nav-link:hover {
+  color: var(--brand-red);
+}
+
+/* Page headings stand on typography and spacing, not a repeated accent rule. */
+.heading-accent {
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

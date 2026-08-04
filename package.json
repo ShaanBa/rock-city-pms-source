@@ -1,0 +1,19 @@
+{
+  "name": "rock-city-pms",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "motel:start": "pm2 start ecosystem.config.cjs",
+    "motel:stop": "pm2 stop ecosystem.config.cjs",
+    "motel:restart": "pm2 restart ecosystem.config.cjs",
+    "motel:status": "pm2 status",
+    "motel:logs": "pm2 logs",
+    "motel:save": "pm2 save"
+  },
+  "devDependencies": {
+    "pm2": "^7.0.3"
+  },
+  "dependencies": {
+    "date-fns": "^4.3.0"
+  }
+}

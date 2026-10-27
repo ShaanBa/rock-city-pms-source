@@ -11,7 +11,7 @@
     "motel:save": "pm2 save"
   },
   "devDependencies": {
-    "pm2": "^7.0.3"
+    "pm2": "^7.1.1"
   },
   "dependencies": {
     "date-fns": "^4.3.0"
